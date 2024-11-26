@@ -106,36 +106,59 @@ https://www.jenkins.io/doc/book/installing/linux/
 2. **Configure Pipeline Script**:
    - In the **Pipeline** section, use the following script:
      ```groovy
-     pipeline {
-         agent any
-         tools {
-             jdk 'jdk11'
-             maven 'maven3'
-         }
-         stages {
-             stage('Git Checkout') {
-                 steps {
-                     git branch: '<branch_name>', url: '<git_repository_url>'
-                 }
-             }
-             stage('Maven Compile') {
-                 steps {
-                     sh 'mvn compile'
-                 }
-             }
-             stage('Maven Package') {
-                 steps {
-                     sh 'mvn package'
-                 }
-             }
-             stage('Deploy to Tomcat') {
-                 steps {
-                     sh 'cp target/webapp.war /path/to/tomcat/webapps/'
-                 }
-             }
-         }
-     }
-     ```
+    pipeline {
+    agent any
+
+   tools {
+    jdk 'jdk11'   // Ensure JDK 21 is configured in Global Tool Configuration
+    maven 'maven3' // Ensure Maven 3 is configured in Global Tool Configuration
+  }
+  
+   environment {
+        SCANNER_HOME = tool 'sonar-scanner'
+    }
+
+    stages {
+      stage("Git Checkout"){
+          steps{
+                git branch: 'main', url: 'https://github.com/RahulDubey-Devops/Petclinic-demo.git'
+          }
+      }
+      stage("Maven Compile"){
+          steps{
+              sh 'mvn clean compile'
+          }
+      }
+      stage("test"){
+          steps{
+              sh 'mvn test'
+          }
+      }
+      
+stage('SonarQube Analysis') {
+    steps {
+        // Make sure you use the correct SonarQube server environment as defined in Jenkins configuration
+        withSonarQubeEnv('sonar-server') {
+         sh 'mvn sonar:sonar'
+        }
+    }
+}
+
+      stage('Maven Package') {
+          steps {
+            // Package the project
+            sh 'mvn package'
+          }
+        }
+        
+        
+        stage("Deplo to Tomcat"){
+            steps{
+           // Switch to root user and provide the password for su
+            sh "sudo cp target/*.war /opt/tomcat/webapps/"
+            }
+        }
+    }
 
 ---
 
