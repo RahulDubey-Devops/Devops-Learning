@@ -176,7 +176,7 @@ pipeline {
     }
 }
 ```
-![image](https://github.com/user-attachments/assets/c0bdb515-a35d-475d-a750-14bad48bdcdd)
+![image](https://github.com/user-attachments/assets/53a93f20-5c13-48e1-97b4-45756818ef70)
 
 ![image](https://github.com/user-attachments/assets/607b843e-93a3-4ecd-86c5-d709834bcb13)
 
