@@ -105,6 +105,7 @@ https://www.jenkins.io/doc/book/installing/linux/
    - From the Jenkins dashboard, click **New Item**, enter a name, and select **Pipeline**.
 2. **Configure Pipeline Script**:
    - In the **Pipeline** section, use the following script:
+     
      ```groovy
     pipeline {
     agent any
@@ -143,23 +144,19 @@ stage('SonarQube Analysis') {
         }
     }
 }
-
       stage('Maven Package') {
           steps {
             // Package the project
             sh 'mvn package'
           }
         }
-        
-        
-        stage("Deplo to Tomcat"){
+          stage("Deplo to Tomcat"){
             steps{
            // Switch to root user and provide the password for su
             sh "sudo cp target/*.war /opt/tomcat/webapps/"
             }
         }
-    }
-
+}
 ---
 
 
