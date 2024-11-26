@@ -156,7 +156,8 @@ stage('SonarQube Analysis') {
             sh "sudo cp target/*.war /opt/tomcat/webapps/"
             }
         }
-}
+}```
+
 ---
 
 
