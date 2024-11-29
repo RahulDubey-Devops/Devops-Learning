@@ -172,6 +172,11 @@ In the above configuration, replace `your-username` with your Nexus username and
 
 Make sure to include this `settings.xml` file in the appropriate location on your system.
 
+Make sure to change this setting in Nexus
+
+![image](https://github.com/user-attachments/assets/05419e37-5c92-49c5-93a1-9d3ce12cf1c3)
+
+
 ### After this just need to run commands for deploy as below
 
 #### In case of maven on linux
@@ -190,5 +195,5 @@ configFileProvider([configFile(fileId: '1c322f97-3d77-4302-abe0-7dd0d866eab0', v
 ![image](https://github.com/user-attachments/assets/b1ff7b7f-af83-463f-b0f4-e997986f852a)
 
 
-### Once the pipeline is success you will get the results in Nexus as below.
+
 
